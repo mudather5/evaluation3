@@ -5,14 +5,13 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>muda-site</title>
-  <meta name="description" content="#">
+  <meta name="description" content="Basket e-commerce, discover our baskets">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
@@ -23,14 +22,7 @@
 
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-lighte bg-dark">
-          <div class="container">
-              <h4 class="text-light"><a class="navbar-brand" href="#">Menu</a></h4>
-
-             <h4 class="text-light"><a class="navbar-brand" href="#">Evaluation 3</a></h4>
-
-          </div>
-        </nav>
+        
 
 
     </body>

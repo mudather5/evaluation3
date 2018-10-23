@@ -99,13 +99,6 @@ textarea {
 
 
 
-.spec{
-    border: solid 2px balck;
-    padding-top: 20px; 
-}
-.spec p {
-    padding-bottom: 10px;
-}
 body{
     background-color:  	#F5F5F5;
 }
@@ -113,7 +106,9 @@ body{
     text-align: center;
 }
 
-
+h2{
+  color: red;
+}
 
 
 
