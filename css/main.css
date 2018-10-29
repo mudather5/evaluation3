@@ -100,15 +100,84 @@ textarea {
 
 
 body{
-    background-color:  	#F5F5F5;
+    background-color:  	gray;
 }
 .navbar{
     text-align: center;
 }
 
-h2{
-  color: red;
+.offset-2{
+  margin-top: 10%;
 }
+
+
+
+   #home{
+    margin-top: 70px;
+  }
+
+
+  #home input,
+  #secondform input{
+    width: 400px;
+    height: 45px;
+  }
+
+
+  #signin{
+    background-color: #6495ED;
+    color: white;
+  }
+  #signout{
+    background-color: #3CB371;
+    color: white;
+  }
+  h2{
+    display: inline-block;
+  }
+
+  @media screen and (min-width: 320px) {
+#home  input,
+#secondform input {
+    max-width: 300px;
+
+  }
+
+}
+
+@media screen and (min-width: 790px) {
+#home input,
+#secondform input {
+    max-width: 400px;
+
+  }
+}
+
+@media screen and (min-width: 800px) {
+#home input,
+#secondform input{
+    margin-left: 200px;
+  }
+
+
+}
+@media screen and (min-width: 1300px) {
+#home input,
+#secondform input{
+    margin-left: 350px;
+  }
+
+}
+
+.offset-2{
+  padding-right: 200px;
+}
+
+
+
+}
+
+
 
 
 

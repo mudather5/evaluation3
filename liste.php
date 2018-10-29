@@ -2,23 +2,24 @@
 include("header.php");
 include("config.php");
 include("projets.php");
+// include("listes.php")
 ?>
 
 
 <div class="container">
-   <div class="row">
-       <div class="col-lg-7 col-sm-6 offset-3 mb-4">
+   <div class="row justify-content-center">
+            <?php foreach($projets as $key => $value){ ?>
+			  <div class="project col-md-3 col-sm-6">
+          <a href="index.php">
+            <p class="text-white">	<?php echo $value['name'] ?></p>
+          </a>
 
-				      <?php foreach($projets as $key => $value){ ?>
+				   <a href="task.php?index=<?php echo $key; ?>">
+              <h4 class="text-white"><b><?php echo $value['listes'] ?></b></h4>
+           </a>
 
+				    <p class="text-white">Date limite de la réaliation :<?php echo ' '.date('Y', strtotime('+1 year')); ?></p>
 
-      				<p>nom de projet :	<?php echo $value['name'] ?></p>
-              <p>discription : <?php echo $value['discription']?></p>
-
-              <a href="task.php">
-      				  <p>Nom de liste : <?php echo $value['listes'] ?></p>
-              </a>
-      				<p>Date de réaliation : <?php echo $value['date_réaliation'] ?></p>
 
 
 			  <?php
@@ -26,7 +27,9 @@ include("projets.php");
 			  }
         ?>
 
-<?php
+
+
+        <?php
         if (isset($_POST['nom']) AND !empty($_POST['nom'])){
 
       		$nom = htmlspecialchars($_POST['nom']);
@@ -35,8 +38,6 @@ include("projets.php");
       		$insert = $bdd->prepare("INSERT INTO listes (nom) VALUES (:nom)");
             $insert->execute(array(
               'nom' => $nom
-
-
             ));
 
       	}
@@ -45,19 +46,27 @@ include("projets.php");
 
           while ($liste = $listes->fetch())
           {
-          	 echo 'nom de liste : '.$liste['nom'].'<br/>';
+          	 echo '<p class="text-white">'.'nom de liste : '.$liste['nom'].'<br/>'.'</p>';
 
           }
 
+          if(isset($_POST['delete'])){
+            $id = $_POST['delete'];
 
- ?>
+            $delete = $bdd->prepare("DELETE FROM listes WHERE id > 0");
+            $delete->bindValue('id', $id, PDO::PARAM_INT);
+            $delete->execute();
+            $delete->CloseCursor();
+          }
+          ?>
 
 
-            			<form action="liste.php" method="post">
-							       <p>nom de liste: <input type="text" name="nom"></p>
-							       <input type="submit" name="submit" value="ajouter une liste">
-					      	</form>
 
-      </div>
+              <form action="liste.php" method="post">
+  							<input type="text" name="nom"><br>
+  							<input type="submit" name="submit" value="ajouter">
+                <input type="submit" name="delete" value="suprimer">
+				      </form>
+        </div>
     </div>
-  </div>
+</div>
