@@ -2,10 +2,7 @@
   include("header.php");
   include("projets.php");
   include("config.php");
- ?>
-
-
-
+?>
 
 
 <div class="container">
@@ -34,45 +31,45 @@
 			  }
         ?>
 
-            <h4 class="text-white">pour ajouter un nouveaux projet:</h3>
+        <h4 class="text-white">pour ajouter un nouveaux projet:</h3>
 
-<?php
+        <?php
 
-      if (isset($_POST['nom']) AND isset($_POST['discription']) AND !empty($_POST['nom']) AND !empty($_POST['discription']))
-      {
-      		$nom = htmlspecialchars($_POST['nom']);
-      		$discription = htmlspecialchars($_POST['discription']);
+          if (isset($_POST['nom']) AND isset($_POST['discription']) AND !empty($_POST['nom']) AND !empty($_POST['discription']))
+          {      //  sent name and dicription from form
+          		$nom = htmlspecialchars($_POST['nom']);
+          		$discription = htmlspecialchars($_POST['discription']);
 
+              //insert in to table inorder to query  the name and the discription
+          		$insert = $bdd->prepare("INSERT INTO projet(nom, discription, date_limite) VALUES(:nom, :discription, NOW())");
+                $insert->execute(array(
+          		  'nom' => $nom,
+          		  'discription' => $discription
+          	  ));
 
-      		$insert = $bdd->prepare("INSERT INTO projet(nom, discription, date_limite) VALUES(:nom, :discription, NOW())");
-            $insert->execute(array(
-      		  'nom' => $nom,
-      		  'discription' => $discription
-      	  ));
+          	}
+              //Recovery the project from table
+          		$projects = $bdd->query('SELECT * FROM projet');
+              // display imap_threadthe name of project, discription and date limite
+              while ($projet = $projects->fetch())
+              {
+              	 echo '<p class="text-white">'.'nom de projet : '.$projet['nom'].'<br/>'.'</p>';
+          		   echo '<p class="text-white">'.'discription : '.$projet['discription'].'<br/>'.'</p>';
+                 echo '<p class="text-white">'.'Date limite de realisation : '.$projet['date_limite'].'<br/>'.'</p>';
 
-      	}
+              }
+              //check if the button delete in the form
+              if(isset($_POST['delete'])){
+                  $id = $_POST['delete'];
+                  $id = '';
+                //delet the project from data base
+                  $delete = $bdd->prepare("DELETE FROM projet WHERE id > 0");
+                  $delete->bindValue('id', $id, PDO::PARAM_INT);
+                  $delete->execute();
+                  $delete->CloseCursor();
+              }
 
-      		$projects = $bdd->query('SELECT * FROM projet');
-
-          while ($projet = $projects->fetch())
-          {
-          	 echo '<p class="text-white">'.'nom de projet : '.$projet['nom'].'<br/>'.'</p>';
-      		   echo '<p class="text-white">'.'discription : '.$projet['discription'].'<br/>'.'</p>';
-             echo '<p class="text-white">'.'Date limite de realisation : '.$projet['date_limite'].'<br/>'.'</p>';
-
-          }
-          if(isset($_POST['delete'])){
-              $id = $_POST['delete'];
-              $id = '';
-
-              $delete = $bdd->prepare("DELETE FROM projet WHERE id > 0");
-              $delete->bindValue('id', $id, PDO::PARAM_INT);
-              $delete->execute();
-              $delete->CloseCursor();
-          }
-
- ?>
-
+             ?>
 
             			<form action="index.php" method="post">
 							       <p class="text-white">nom de projet: <input type="text" name="nom"></p>

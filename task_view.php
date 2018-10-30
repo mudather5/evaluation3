@@ -2,22 +2,24 @@
   include("header.php");
   include("projets.php");
   include("config.php");
+  session_start();
+  $taskes = $bdd->query('SELECT * FROM tache');
+  $taske = $taskes->fetchAll();
+  $_SESSION['id_task']=$taske[$_GET['index']]['id'];
+var_dump($_SESSION['id_task']);
  ?>
 
 <div class="container">
    <div class="row justify-content-center">
        <div class="col-lg-8 col-sm-6 offset-2 mb-2">
 
-          <?php foreach($projets as $key => $value){ ?>
-          <a href="projets.php?index=<?php echo $kays; ?>"></a>
-          <p class="text-white">Nom: <?php echo $value['listes'] ?></p>
-          <p class="text-white">Nom : <a href="tâche.php"><?php echo '<b>'.$value['tâches'].'</b>'?></a></p>
+          <p><?php echo $taske[$_GET['index']]['nom']; ?></p>
+          <p><?php echo $taske[$_GET['index']]['date_limite']; ?></p>
+          <form action="delete_task.php" method="post">
+              <input type="submit" name="delete" value="Supprimer">
+          </form>
 
-      <?php
 
-      }
-
-      ?>
 
 
 
@@ -36,29 +38,9 @@
 
       	  }
           //recovery
-      		$taskes = $bdd->query('SELECT * FROM tache');
-          $taske = $taskes->fetchAll();
-          foreach ($taske as $key => $value)
-          {    var_dump($value['id']);
-                echo 'nom de tâche : '.$value['nom'].'<br/>';
-                echo 'date limites de la réaliation : '.$value['date_limite'].'<br/>';
-                echo '<form action="task_view.php?index='. $key.'" method="post">';
-                echo '<input type="submit" name="" value="View task">'.'<br/>';
-                echo '</form>';
 
 
-        }
-            if(isset($_POST['delete'])){
-              var_dump('toto');
-              $id = $_POST['delete'];
-              var_dump($_POST['delete']);
-              $delete = $bdd->prepare("DELETE FROM tache WHERE id = :id");
-              //$delete->bindValue('id', $id, PDO::PARAM_INT);
-              $delete->execute(array(
-                'id'=>$value['id']
-              ));
-              $delete->CloseCursor();
-          }
+
 
 
 
@@ -77,10 +59,7 @@
           ?>
 
 
-            <form action="task.php" method="post">
-                <input type="text" name="nom"><br>
-                <input type="submit" name="add" value="ajouter">
-            </form><br>
+
             <!-- <form method="post">
                 <p class="text-white"><input type="checkbox" name="task[]" value="Wire frame">Wire frame.</p>
                 <p class="text-white"><input type="checkbox" name="task[]" value="chemat de bdd">Chemat de bdd.</p>
