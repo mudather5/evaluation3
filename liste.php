@@ -18,7 +18,9 @@
 				<p class="text-white"><b>	<?php echo $value['name'] ?></b></p>
       </a>
 
-				<p class="text-white"><?php echo '<p class="text-white">'.$value['listes'].'</p>'; ?></p>
+    <a href="task.php?index=<?php echo $key; ?>">
+      <p class="text-white"><?php echo '<p class="text-white">'.$value['listes'].'</p>'; ?></p>
+    </a>
 
 				<p class="text-white">Date limite de réaliation :<?php echo '<p class="text-white">'.date('Y', strtotime('+1 year')).'</p>'; ?></p>
 
