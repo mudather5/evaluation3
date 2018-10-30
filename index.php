@@ -49,23 +49,34 @@
 
           	}
               //Recovery the project from table
-          		$projects = $bdd->query('SELECT * FROM projet');
+          		$projets = $bdd->query('SELECT * FROM projet');
               // display imap_threadthe name of project, discription and date limite
-              while ($projet = $projects->fetch())
-              {
-              	 echo '<p class="text-white">'.'nom de projet : '.$projet['nom'].'<br/>'.'</p>';
-          		   echo '<p class="text-white">'.'discription : '.$projet['discription'].'<br/>'.'</p>';
-                 echo '<p class="text-white">'.'Date limite de realisation : '.$projet['date_limite'].'<br/>'.'</p>';
+              $projet = $projets->fetchAll();
+              foreach ($projet as $key => $value){
 
-              }
+				echo 'nom de projet : '.$value['nom'].'<br/>';
+                echo 'date limites de la réaliation : '.$value['date_limite'].'<br/>';
+                echo '<form action="projet_view.php?index='. $key.'" method="post">';
+                echo '<input type="submit" name="" value="View projet">'.'<br/>';
+                echo '</form>';
+			  }
+
+//              while ($projet = $projects->fetch())
+//              {
+//              	 echo '<p class="text-white">'.'nom de projet : '.$projet['nom'].'<br/>'.'</p>';
+//          		   echo '<p class="text-white">'.'discription : '.$projet['discription'].'<br/>'.'</p>';
+//                 echo '<p class="text-white">'.'Date limite de realisation : '.$projet['date_limite'].'<br/>'.'</p>';
+//
+//              }
               //check if the button delete in the form
               if(isset($_POST['delete'])){
                   $id = $_POST['delete'];
-                  $id = '';
+
                 //delet the project from data base
-                  $delete = $bdd->prepare("DELETE FROM projet WHERE id > 0");
-                  $delete->bindValue('id', $id, PDO::PARAM_INT);
-                  $delete->execute();
+                  $delete = $bdd->prepare("DELETE FROM projet WHERE id =:id");
+                  $delete->execute(array(
+					'id'=>$value['id']
+				  ));
                   $delete->CloseCursor();
               }
 
@@ -75,7 +86,6 @@
 							       <p class="text-white">nom de projet: <input type="text" name="nom"></p>
 							       <p class="text-white">la discription :<input type="text" name="discription"></p>
 							        <input type="submit" name="submit" value="ajouter" id="project">
-                       <input type="submit" name="delete" value="suprimer">
 					      	</form>
 
 
