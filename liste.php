@@ -10,23 +10,21 @@
        <div class="col-lg-7 col-sm-6 offset-3 mb-2">
 
 
-				   <?php foreach($projets as $key => $value){ ?>
+				<?php foreach($projets as $key => $value){ ?>
 			  <div class="project col-md-3 col-sm-6">
-				<a class="link_detail" href="liste.php?index=<?php echo $key; ?>">
+				    <a class="link_detail" href="liste.php?index=<?php echo $key; ?>">
 
-				  <div class="spec">
-				<p class="text-white"><b>	<?php echo $value['name'] ?></b></p>
-      </a>
+			    	   <p class="text-white"><b>	<?php echo $value['name'] ?></b></p>
+            </a>
 
-    <a href="task.php?index=<?php echo $key; ?>">
-      <p class="text-white"><?php echo '<p class="text-white">'.$value['listes'].'</p>'; ?></p>
-    </a>
+            <a href="task.php?index=<?php echo $key; ?>">
+                <p class="text-white"><?php echo '<p class="text-white">'.$value['listes'].'</p>'; ?></p>
+            </a>
 
-				<p class="text-white">Date limite de réaliation :<?php echo '<p class="text-white">'.date('Y', strtotime('+1 year')).'</p>'; ?></p>
+				    <p class="text-white">Date limite de réaliation :<?php echo '<p class="text-white">'.date('Y', strtotime('+1 year')).'</p>'; ?></p>
 
 				</div>
 
-			  </div>
 
 			  <?php
 
@@ -53,11 +51,11 @@
               $liste = $listes->fetchAll();
               foreach ($liste as $key => $value){
 
-				echo 'nom de liste : '.$value['nom'].'<br/>';
+				        echo 'nom de liste : '.$value['nom'].'<br/>';
                 echo '<form action="liste_view.php?index='. $key.'" method="post">';
                 echo '<input type="submit" name="" value="Show listes">'.'<br/>';
                 echo '</form>';
-			  }
+			      }
 
 
               //check if the button delete in the form
@@ -67,8 +65,8 @@
                 //delet the project from data base
                   $delete = $bdd->prepare("DELETE FROM listes WHERE id =:id");
                   $delete->execute(array(
-					'id'=>$value['id']
-				  ));
+					        'id'=>$value['id']
+				          ));
                   $delete->CloseCursor();
               }
 

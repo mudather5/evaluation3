@@ -5,8 +5,8 @@
  ?>
 
 <div class="container">
-   <div class="row justify-content-center">
-       <div class="col-lg-8 col-sm-6 offset-2 mb-2">
+   <div class="row justify-content-center mt-4">
+       <div class="col-lg-7 col-sm-6 offset-3">
 
           <?php foreach($projets as $key => $value){ ?>
           <a href="projets.php?index=<?php echo $kays; ?>"></a>
@@ -18,7 +18,7 @@
       }
 
       ?>
-
+    </div>
 
 
       <?php
@@ -61,7 +61,7 @@
           }
 
 
-          
+
 
 
           ?>
@@ -70,11 +70,9 @@
             <form action="task.php" method="post">
                 <input type="text" name="nom"><br>
                 <input type="submit" name="add" value="ajouter">
-            </form><br>
-            
+            </form>
 
-       </div>
+
+       <!-- </div> -->
    </div>
-
-
 </div>

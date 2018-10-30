@@ -1,8 +1,8 @@
 <?php
   include('header.php');
 ?>
-
-<div class="row justify-content-center mt-4">
+<div class="container">
+  <div class="row justify-content-center mt-4">
       <?php
         if(isset($_POST['tasks']))
         {//to run PHP script on submit
@@ -24,4 +24,5 @@
         }
         ?>
 
+  </div>
 </div>

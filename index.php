@@ -61,13 +61,7 @@
                 echo '</form>';
 			  }
 
-//              while ($projet = $projects->fetch())
-//              {
-//              	 echo '<p class="text-white">'.'nom de projet : '.$projet['nom'].'<br/>'.'</p>';
-//          		   echo '<p class="text-white">'.'discription : '.$projet['discription'].'<br/>'.'</p>';
-//                 echo '<p class="text-white">'.'Date limite de realisation : '.$projet['date_limite'].'<br/>'.'</p>';
 //
-//              }
               //check if the button delete in the form
               if(isset($_POST['delete'])){
                   $id = $_POST['delete'];
@@ -75,12 +69,12 @@
                 //delet the project from data base
                   $delete = $bdd->prepare("DELETE FROM projet WHERE id =:id");
                   $delete->execute(array(
-					'id'=>$value['id']
-				  ));
+					        'id'=>$value['id']
+				          ));
                   $delete->CloseCursor();
-              }
+                  }
 
-             ?>
+                 ?>
 
             			<form action="index.php" method="post">
 							       <p class="text-white">nom de projet: <input type="text" name="nom"></p>
@@ -91,6 +85,6 @@
 
 
 
-         </div>
-   </div>
+             </div>
+       </div>
  </div>

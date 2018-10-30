@@ -10,7 +10,7 @@
 
 <div class="container">
    <div class="row justify-content-center">
-       <div class="col-lg-8 col-sm-6 offset-2 mb-2">
+       <div class="col-lg-7 col-sm-6 offset-1 mt-2">
 
           <p><?php echo $liste[$_GET['index']]['nom']; ?></p>
           <form action="delete_listes.php" method="post">
