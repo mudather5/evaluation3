@@ -6,7 +6,6 @@
   $taskes = $bdd->query('SELECT * FROM tache');
   $taske = $taskes->fetchAll();
   $_SESSION['id_task']=$taske[$_GET['index']]['id'];
-var_dump($_SESSION['id_task']);
  ?>
 
 <div class="container">
@@ -37,37 +36,26 @@ var_dump($_SESSION['id_task']);
             ));
 
       	  }
-          //recovery
 
 
 
 
 
 
-          if(isset($_POST['tasks'])){//to run PHP script on submit
-      		    if(!empty($_POST['task'])){
-                // Loop to store and display values of individual checked checkbox.
-                foreach ($_POST["task"] as $selected) {
-                    echo'<p>'.$selected.' '.'<i class="fa fa-check-square" style="font-size:30px;color:green"></i>'.'</p>';
-                }
-              }else{
-                  echo '<p>'.'choisissez au moint une tâche'.'</p>';
-                }
-          }
+          //
+          // if(isset($_POST['tasks'])){//to run PHP script on submit
+      		//     if(!empty($_POST['task'])){
+          //       // Loop to store and display values of individual checked checkbox.
+          //       foreach ($_POST["task"] as $selected) {
+          //           echo'<p>'.$selected.' '.'<i class="fa fa-check-square" style="font-size:30px;color:green"></i>'.'</p>';
+          //       }
+          //     }else{
+          //         echo '<p>'.'choisissez au moint une tâche'.'</p>';
+          //       }
+          // }
 
 
           ?>
-
-
-
-            <!-- <form method="post">
-                <p class="text-white"><input type="checkbox" name="task[]" value="Wire frame">Wire frame.</p>
-                <p class="text-white"><input type="checkbox" name="task[]" value="chemat de bdd">Chemat de bdd.</p>
-                <p class="text-white"><input type="checkbox" name="task[]" value="favicon">Favicon.</p>
-                <p class="text-white"><input type="checkbox" name="task[]" value="mobile first">Mobile first.</p>
-                <input type="submit" name="tasks" value="submit">
-
-            </form> -->
 
 
        </div>
