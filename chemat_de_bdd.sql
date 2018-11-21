@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Ven 14 Septembre 2018 à 21:42
--- Version du serveur :  5.7.23-0ubuntu0.16.04.1
--- Version de PHP :  7.0.30-0ubuntu0.16.04.1
+-- Généré le :  Mer 21 Novembre 2018 à 09:41
+-- Version du serveur :  5.7.24-0ubuntu0.16.04.1
+-- Version de PHP :  7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,133 +17,157 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `e-shop`
+-- Base de données :  `evaluation`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `articles`
+-- Structure de la table `listes`
 --
 
-CREATE TABLE `articles` (
+CREATE TABLE `listes` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `contact` text NOT NULL,
-  `author_id` int(11) NOT NULL
+  `nom` varchar(255) NOT NULL,
+  `projet_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `authors`
+-- Structure de la table `login`
 --
 
-CREATE TABLE `authors` (
+CREATE TABLE `login` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `login`
+--
+
+INSERT INTO `login` (`id`, `email`, `password`) VALUES
+(2, 'man@gmail.com', '0123'),
+(3, 'man@gmail.com', '12345'),
+(4, 'man@gmail.com', '12345'),
+(5, 'man@gmail.com', '0123'),
+(6, 'mudather@gmail.com', '12345'),
+(7, 'mudather@gmail.com', '12345'),
+(8, 'ahamed@gmail.com', '987'),
+(9, 'ahamed@gmail.com', '987'),
+(10, 'ahmed@gmail.com', '987'),
+(11, 'ahmed@gmail.com', '987'),
+(12, 'ahamed@gmail.com', '987'),
+(13, 'amin@gmail.com', '120'),
+(14, 'shog@gmail.com', '12345'),
+(15, 'shog@gmail.com', '0000');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comments`
+-- Structure de la table `projet`
 --
 
-CREATE TABLE `comments` (
+CREATE TABLE `projet` (
   `id` int(11) NOT NULL,
-  `user_name` varchar(30) NOT NULL,
-  `content` text NOT NULL,
-  `article_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `date_limite` datetime DEFAULT CURRENT_TIMESTAMP,
+  `nom` varchar(255) NOT NULL,
+  `discription` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table `tache`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `tache` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `nom` varchar(255) NOT NULL,
+  `date_limite` datetime DEFAULT CURRENT_TIMESTAMP,
+  `listes_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `tache`
+--
+
+INSERT INTO `tache` (`id`, `nom`, `date_limite`, `listes_id`) VALUES
+(1, 'ghjk', '2018-10-30 22:45:01', NULL);
 
 --
 -- Index pour les tables exportées
 --
 
 --
--- Index pour la table `articles`
+-- Index pour la table `listes`
 --
-ALTER TABLE `articles`
+ALTER TABLE `listes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `author_id` (`author_id`);
+  ADD KEY `projet_id` (`projet_id`),
+  ADD KEY `projet_id_2` (`projet_id`);
 
 --
--- Index pour la table `authors`
+-- Index pour la table `login`
 --
-ALTER TABLE `authors`
+ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `comments`
+-- Index pour la table `projet`
 --
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE `projet`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Index pour la table `tache`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tache`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `listes_id` (`listes_id`),
+  ADD KEY `listes_id_2` (`listes_id`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT pour la table `articles`
+-- AUTO_INCREMENT pour la table `listes`
 --
-ALTER TABLE `articles`
+ALTER TABLE `listes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `authors`
+-- AUTO_INCREMENT pour la table `login`
 --
-ALTER TABLE `authors`
+ALTER TABLE `login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `projet`
+--
+ALTER TABLE `projet`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `comments`
+-- AUTO_INCREMENT pour la table `tache`
 --
-ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tache`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `articles`
+-- Contraintes pour la table `listes`
 --
-ALTER TABLE `articles`
-  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `listes`
+  ADD CONSTRAINT `listes_ibfk_1` FOREIGN KEY (`projet_id`) REFERENCES `projet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `comments`
+-- Contraintes pour la table `tache`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tache`
+  ADD CONSTRAINT `tache_ibfk_1` FOREIGN KEY (`listes_id`) REFERENCES `listes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
